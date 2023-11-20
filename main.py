@@ -1,3 +1,4 @@
+# main.py
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.types import ParseMode, Message
