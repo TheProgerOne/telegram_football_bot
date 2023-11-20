@@ -1,10 +1,16 @@
 # Telegram Football Bot
 
 # Для запуска
-Установка зависимостей и второе это запуск программы
+Клонируем репозиторий
 ```bash
 git clone https://github.com/TheProgerOne/telegram_football_bot.git
+```
+Установка зависимостей
+```bash
 pip install -r requirements.txt
+```
+Запуск проекта
+```bash
 python main.py
 ```
 # GIT
@@ -25,6 +31,10 @@ git add .
 ```bash
 git commit -m "VOCUB-1 Описание ваших изменений" # Пример коммита
 ```
+Получение последних обновлений проекта
+```bash
+git pull origin master
+```
 
 # По завершению работы и код ревью
 ```bash
@@ -33,3 +43,4 @@ git merge --no-ff VOCUB-1
 git branch -d VOCUB-1
 git push origin master
 ```
+
