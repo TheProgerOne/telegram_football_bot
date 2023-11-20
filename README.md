@@ -3,10 +3,12 @@
 ## Для запуска
 # Установка зависимостей и второе это запуск программы
 ```bash
+git clone https://github.com/TheProgerOne/telegram_football_bot.git
 pip install -r requirements.txt
 python main.py
 ```
-## Перед комитом скачайте и потом настройте git
+## GIT
+#Перед комитом скачайте и потом настройте git
 ```bash
 git config --global user.email "ваш_корпоративный_email"
 git config --global user.name "ВАШЕ_ИМЯ_И_ФАМИЛИЯ"
