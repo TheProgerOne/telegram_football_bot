@@ -1,4 +1,3 @@
-# test.py
 string = "bron"
 
 if string.find("next") != -1:
