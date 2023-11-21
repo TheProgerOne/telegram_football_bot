@@ -9,7 +9,8 @@ def add_user(chat_id, name):
                 host="localhost",
                 user="root",
                 password="",
-                database="test"
+                database="test",
+                port=3307
         ) as connection:
             print("Connect Database")
 

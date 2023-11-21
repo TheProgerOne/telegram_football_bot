@@ -1,15 +1,16 @@
+# main.py
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.types import ParseMode, Message
 from aiogram.utils import executor
 
+import aiogram.types.message
 import datetime
 
 from Data.base import add_user
 from func.functions import navigator_buttons
 from func.functions import callbeck_bron_data
 from func.functions import button_bron_menu
-
 from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
