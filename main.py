@@ -1,7 +1,10 @@
+# main.py
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.types import ParseMode, Message
 from aiogram.utils import executor
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import State, StatesGroup
 
 import datetime
 
@@ -111,7 +114,50 @@ async def agree_ref_start(query: types.callback_query):
          await bot.delete_message(chat_id=query.message.chat.id, message_id=query.message.message_id)
          await bot.delete_message(chat_id=query.message.chat.id, message_id=query.message.message_id-1)
         
-   
+class BookingStates(StatesGroup):
+    waiting_for_time = State()
+
+@dp.message_handler(lambda message: message.text == 'Забронировать поле 🔒')
+async def handle_booking_request(message: types.Message):
+    await message.answer("Пожалуйста, введите время в формате 16:00-20:00")
+    await BookingStates.waiting_for_time.set()
+
+@dp.message_handler(lambda message: message.text.count(':') == 1 and '-' in message.text, state=BookingStates.waiting_for_time)
+async def handle_time_input(message: types.Message, state: FSMContext):
+    entered_time = message.text.strip()
+    how_much_time_to_pay = calculate_time_difference(entered_time)
+
+    if how_much_time_to_pay is not None:
+        link = generate_payment_link(how_much_time_to_pay)
+        await message.answer(f"Спасибо, ваше время бронирования: {entered_time}")
+        await message.answer(f"Ссылка для бронирования поля: {link}")
+        await state.finish()
+    else:
+        await message.answer("Неправильный формат времени. Введите время в формате 16:00-20:00")
+
+
+def calculate_time_difference(input_time):
+    # Разделение времени по тире и извлечение начального и конечного времени
+    start_time, end_time = input_time.split('-')
+
+    # Разделение часов и минут
+    start_hour = int(start_time.split(':')[0])
+    end_hour = int(end_time.split(':')[0])
+
+    # Вычисление разницы в часах
+    difference = end_hour - start_hour
+
+    return difference
+
+
+def generate_payment_link(difference):
+    if difference == 4:
+        return "https://example.com/payment_4_hours"
+    elif difference == 3:
+        return "https://example.com/payment_3_hours"
+    else:
+        return "https://example.com/default_payment_link"
+    
 
 if __name__ == '__main__':
     executor.start_polling(
