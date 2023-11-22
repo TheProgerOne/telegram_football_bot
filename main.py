@@ -14,7 +14,7 @@ from func.functions import button_bron_menu
 from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
-
+    
 token = '5855487509:AAFvQUT4qtmkSCypdLaYKXjjuy2MkO7lNQk'
 
 button_search = KeyboardButton('Поиск свободных полей 🔍')
@@ -71,7 +71,7 @@ async def message_handler(message: Message):
 
 
 @dp.message_handler()
-async def handler_menu(message: Message):
+async def handler_menu(message: Message, bot: Bot):
     chat_id = message.from_user.id
 
     if message.text == "Поиск свободных полей 🔍":
